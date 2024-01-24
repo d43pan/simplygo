@@ -19,13 +19,16 @@ $is_path_valid = strlen(trim($path)) > 0;
 
 $parsedUri = parse_url($uri);
 
-
+// Check if the path is valid and a URL is posted
 if ( $is_path_valid && isset($_POST['url'])) {
     
     $url = $_POST['url'];
     $parsedUrl = parse_url($url);
 
+
+    // Check if the URL has a scheme (like http:// or https://)
     if (!isset($parsedUrl['scheme'])) {
+        // If the URL doesn't have a scheme, prepend 'http://' to it
         $url = 'http://' . $url;
     }
 
@@ -39,7 +42,8 @@ if ( $is_path_valid && isset($_POST['url'])) {
 }
 
 
-
+// check if the path is valid. Assuming that there's not url in the post
+// meaning we'll try to redirect or let the user create a new redirect or delete (if that was in the path)
 if ($is_path_valid) {
 
     if ($is_delete) {
@@ -105,7 +109,7 @@ foreach ($redirects as $redirect) {
 echo "</table>";
 
 
-/*
+/* some debugging stuff
 echo "<pre>POST: ";
 var_dump($_POST);
 echo "</pre>";
