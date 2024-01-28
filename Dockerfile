@@ -12,8 +12,8 @@ WORKDIR /var/www/html/
 COPY . /var/www/html/
 
 # Change the ownership and permissions of the SQLite database file
-RUN chown www-data:www-data /var/www/html/redirects.db
-RUN chmod 664 /var/www/html/redirects.db
+# RUN chown www-data:www-data /var/www/html/redirects.db
+# RUN chmod 664 /var/www/html/redirects.db
 
 
 # Install any needed packages specified in requirements.txt
