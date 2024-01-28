@@ -9,8 +9,12 @@ Simplygo also comes with a simple database interface for managing redirects, mak
 In short, if you're looking for a simple, easy-to-use solution for managing redirects in PHP, simply go to Simplygo.
 
 # Using
-`example.com/<path>` create a redirect at <path>  
-`example.com/<path>/delete` delete the redirect at <path>  
+
+## URL structure
+`example.com/<path>` create a redirect at `<path>`. The next time you go to `example.com/<path>` you will be redirected to the url you entered.
+`example.com/<path>/delete` delete the redirect at `<path>`. The next time you to go `example/com/<path>` you will be prompted to enter a url.
+
+
 
 
 # Installing
