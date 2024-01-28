@@ -11,8 +11,14 @@ In short, if you're looking for a simple, easy-to-use solution for managing redi
 # Using
 
 ## URL structure
-`example.com/<path>` create a redirect at `<path>`. The next time you go to `example.com/<path>` you will be redirected to the url you entered.
-`example.com/<path>/delete` delete the redirect at `<path>`. The next time you to go `example/com/<path>` you will be prompted to enter a url.
+`example.com/<path>`  
+Create a redirect at `<path>`. The next time you go to `example.com/<path>` you will be redirected to the url you entered.  
+
+
+`example.com/<path>/delete` 
+Delete the redirect at `<path>`. The next time you to go `example/com/<path>` you will be prompted to enter a url.  
+
+That's it. That's the api.
 
 
 
