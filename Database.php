@@ -3,7 +3,7 @@ class Database {
     private $db;
 
     public function __construct() {
-        $this->db = new SQLite3('redirects.db');
+        $this->db = new SQLite3('/var/www/html/db/redirects.db');
         $this->db->exec('CREATE TABLE IF NOT EXISTS redirects (id INTEGER PRIMARY KEY, path TEXT, url TEXT, deleted INTEGER DEFAULT 0, created DATETIME DEFAULT CURRENT_TIMESTAMP, UNIQUE(path, url))');
         $this->db->exec('CREATE TABLE IF NOT EXISTS visits (id INTEGER PRIMARY KEY, redirect_id INTEGER, visited DATETIME DEFAULT CURRENT_TIMESTAMP)');
     }
