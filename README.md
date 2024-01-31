@@ -27,13 +27,23 @@ That's it. That's the api.
 
 # Installing
 ## Run dockerized and simply  (start here)
-* Ensure you have a www-data user on your host system:  
+* Ensure you have a www-data user and www-data group on your host system:  
 ```
 if id "www-data" >/dev/null 2>&1; then
     echo "User www-data exists."
 else
     echo "User www-data does not exist. Creating..."
     sudo useradd -r -s /bin/false www-data
+fi
+```
+
+```
+# Check if www-data group exists
+if getent group www-data >/dev/null 2>&1; then
+    echo "Group www-data exists."
+else
+    echo "Group www-data does not exist. Creating..."
+    sudo groupadd www-data
 fi
 ```
 * Ensure you have a directory on your host system for your database to live: `sudo mkdir -p db && sudo chown -R www-data:www-data db`  
