@@ -41,6 +41,41 @@ if ( $is_path_valid && isset($_POST['url'])) {
     }
 }
 
+// Add download route
+if ($path == 'download') {
+    // Fetch data from database
+    $data = $db->getAllRedirects();
+
+    // Open output buffer
+    ob_start();
+
+    // Open output stream
+    $stream = fopen('php://output', 'w');
+
+    // Add CSV headers
+    fputcsv($stream, array_keys(reset($data)));
+
+    // Add CSV data
+    foreach ($data as $row) {
+        fputcsv($stream, $row);
+    }
+
+    // Close output stream
+    fclose($stream);
+
+    // Get CSV data from output buffer
+    $csv = ob_get_clean();
+
+    // Set headers to force download of CSV file
+    header('Content-Type: text/csv');
+    header('Content-Disposition: attachment; filename="redirects.csv"');
+
+    // Output CSV data
+    echo $csv;
+
+    // Stop script execution
+    exit;
+}
 
 // check if the path is valid. Assuming that there's not url in the post
 // meaning we'll try to redirect or let the user create a new redirect or delete (if that was in the path)
@@ -106,6 +141,7 @@ foreach ($redirects as $redirect) {
     $visitCount = $redirect['visit_count'];
     echo "<tr><td><a href='/$path'> $path</a></td><td>$url</td><td>$created</td><td>$visitCount</td></tr>";
 }
+echo "<tr><td><a href='/download'> Download All Redirects</a></td><td></td><td></td><td></td></tr>";
 echo "</table>";
 
 
