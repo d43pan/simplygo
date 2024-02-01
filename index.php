@@ -4,8 +4,66 @@
 $config = include('config.php');
 $heading = $config['heading'] ?? 'SimplyGo';
 
+$words = [
+    'breakfast', 'work', 'lunch', 'dinner', 'exercise', 'sleep', 'commute', 'shopping', 'news', 
+    'email', 'social', 'entertainment', 'finance', 'education', 'health', 'travel', 'sports', 
+    'music', 'movies', 'games', 'blog', 'forum', 'search', 'video', 'wiki', 'weather', 'maps', 
+    'banking', 'shopping', 'dating', 'job', 'real-estate', 'food-delivery', 'streaming'
+];
+$randomWord = $words[array_rand($words)];
+
 include 'Database.php';
 $db = new Database();
+
+
+$message = '';
+
+// Check if a file was uploaded
+if (!empty($_FILES['csv'])) {
+    $uploadedFile = $_FILES['csv'];
+    // Check if the file upload was successful
+    if ($uploadedFile['error'] === UPLOAD_ERR_OK) {
+        // Open the file
+        $csvData = file_get_contents($uploadedFile['tmp_name']);
+
+        // Parse the CSV data
+        $data = array_map("str_getcsv", explode("\n", $csvData));
+
+        // Remove the header row
+        array_shift($data);
+
+        // Update the database
+        foreach ($data as $row) {
+
+            // Skip if the row is empty or only contains whitespace characters
+            if (empty($row) || (count($row) == 1 && trim($row[0]) == '')) {
+                continue;
+            }
+
+            // Check if the row has the correct number of columns
+            if ( count($row) != 2) {
+                $message .= "\nEach row should only have 2 columns.";
+                continue;
+            }
+
+            list($path, $url) = $row;
+
+            // Add the new redirect to the database
+            try {
+                if ($db->createRedirect($path, $url)) {
+                    $message .= "Redirect for $path created successfully.<br>";
+                } else {
+                    $message .= "Failed to create redirect for $path.<br>";
+                }
+            } catch (Exception $e) {
+                $message .= "Error creating redirect for $path: " . $e->getMessage() . "<br>";
+            }
+        }
+    } else {
+        $message = 'File upload failed with error code ' . $uploadedFile['error'];
+    }
+}
+
 
 $uri = $_SERVER['REQUEST_URI'];
 $parts = explode('/', $uri);
@@ -111,13 +169,14 @@ if ($is_path_valid) {
 
 }
 
-echo "<h1 style='text-align:center'>$heading</h1>";
+echo "<h1 style='text-align:center'><a href='/'>$heading</a></h1>";
 
 // Show form to enter a new URL
 
 if ($parts[0] == "" && $parts[1] == ""){
     echo "<div style='text-align:center'>";
     echo "Simply go to the url you want to use and I'll prompt you.";
+    echo "For example: <a href='/$randomWord'>/$randomWord</a>";
     echo "</div>";
 }else{
     echo "<div style='text-align:center'>";
@@ -141,9 +200,12 @@ foreach ($redirects as $redirect) {
     $visitCount = $redirect['visit_count'];
     echo "<tr><td><a href='/$path'> $path</a></td><td>$url</td><td>$created</td><td>$visitCount</td></tr>";
 }
+echo "<tr><td></td><td></td><td></td><td></td></tr>";
 echo "<tr><td><a href='/download'> Download All Redirects</a></td><td></td><td></td><td></td></tr>";
+echo '<tr><td></td><td></td><td></td><td><form action="/" method="post" enctype="multipart/form-data"><input type="file" name="csv"><input type="submit" value="Upload CSV"></form></td></tr>';
 echo "</table>";
 
+echo $message;
 
 /* some debugging stuff
 echo "<pre>POST: ";
