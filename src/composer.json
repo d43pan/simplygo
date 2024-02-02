@@ -1,0 +1,24 @@
+{
+    "name": "d43pan/simplygo",
+    "description": "Simple php app for go style links.",
+    "type": "project",
+    "require": {
+        "php": "^7.4",
+        "authorizerdev/authorizer": "^1.0"
+    },
+    "authors": [
+        {
+            "name": "Matt Nicole",
+            "email": "matt@mattnicole.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "YourProject\\": "src/"
+        }
+    }
+}

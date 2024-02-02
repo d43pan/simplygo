@@ -27,7 +27,7 @@ That's it. That's the api.
 
 # Installing
 ## Run dockerized and simply  (start here) 
-* Build and run your simplygo server: `docker build -t simplygo . && docker run --rm -p 8000:80 --name simplygo_server simplygo`  
+* Build and run your simplygo server: `docker build -t simplygo . && docker run --rm -p 8000:80 -e SERVER_NAME=localhost:8000 --name simplygo_server simplygo`  
 * Visit `localhost:8000`
 * Your database will not persist outside of the container. Feel free to download the links and then reupload them.
 * Simple.
