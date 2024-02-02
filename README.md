@@ -26,10 +26,7 @@ That's it. That's the api.
 
 
 # Installing
-## Run dockerized and simply  (start here)
-* Ensure you have a www-data user and www-data group on your host system:  
-`./setup.sh`
-* Ensure you have a directory on your host system for your database to live: `sudo mkdir -p db && sudo chown -R www-data:www-data db`  
+## Run dockerized and simply  (start here) 
 * Build and run your simplygo server: `docker build -t simplygo . && docker run --rm -p 8000:80 -v $(pwd)/db:/var/www/html/db simplygo`  
 * Visit `localhost:8000`
 * Your database will persist at `$(pwd)/db`. Feel free to delete or modify as you need. Feel free to change this if you'd like it stored elsewhere.
