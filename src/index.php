@@ -41,13 +41,14 @@ if (!empty($_FILES['csv'])) {
             }
 
             // Check if the row has the correct number of columns
-            if ( count($row) != 2) {
-                $message .= "\nEach row should only have 2 columns.";
+            if ( count($row) < 2) {
+                $message .= "\nEach row should only have at least 2 columns.";
                 continue;
             }
 
             list($path, $url) = $row;
 
+        
             // Add the new redirect to the database
             try {
                 if ($db->createRedirect($path, $url)) {

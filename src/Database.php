@@ -46,7 +46,7 @@ class Database {
         
     }
     public function getAllRedirects() {
-        $result = $this->db->query("SELECT * FROM redirects WHERE deleted = 0");
+        $result = $this->db->query("SELECT path,url FROM redirects WHERE deleted = 0");
         $redirects = [];
         while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
             $redirects[] = $row;
