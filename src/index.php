@@ -48,7 +48,10 @@ if (!empty($_FILES['csv'])) {
 
             list($path, $url) = $row;
 
-        
+            if ($db->redirectExists($path, $url)) {
+                $message .= "Redirect for $path already exists.<br>";
+                continue;
+            }
             // Add the new redirect to the database
             try {
                 if ($db->createRedirect($path, $url)) {

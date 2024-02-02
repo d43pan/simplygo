@@ -45,6 +45,15 @@ class Database {
         }
         
     }
+
+    public function redirectExists($path, $url) {
+        $stmt = $this->db->prepare("SELECT 1 FROM redirects WHERE path = :path AND url = :url AND deleted = 0");
+        $stmt->bindValue(':path', $path, SQLITE3_TEXT);
+        $stmt->bindValue(':url', $url, SQLITE3_TEXT);
+        $result = $stmt->execute();
+        return $result->fetchArray() !== false;
+    }
+
     public function getAllRedirects() {
         $result = $this->db->query("SELECT path,url FROM redirects WHERE deleted = 0");
         $redirects = [];
