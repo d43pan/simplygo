@@ -169,6 +169,16 @@ if ($is_path_valid) {
 
 }
 
+
+echo '
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>';
+
+
 echo "<h1 style='text-align:center'><a href='/'>$heading</a></h1>";
 
 // Show form to enter a new URL
@@ -181,7 +191,7 @@ if ($parts[0] == "" && $parts[1] == ""){
 }else{
     echo "<div style='text-align:center'>";
     echo "<form method='POST' action=''>";
-    echo "<input type='text' name='url' placeholder='Where should this go?'>";
+    echo "<input type='text' name='url' placeholder='Where should /$path go?'>";
     echo "<input type='submit' value='Create'>";
     echo "</form>";
     echo "</div>";
@@ -198,7 +208,7 @@ foreach ($redirects as $redirect) {
     $url = $redirect['url'];
     $created =  date("m-d-Y", strtotime($redirect['created']));
     $visitCount = $redirect['visit_count'];
-    echo "<tr><td><a href='/$path'> $path</a></td><td>$url</td><td>$created</td><td>$visitCount</td></tr>";
+    echo "<tr><td><a href='/$path'> $path</a></td><td>$url</td><td>$created</td><td class='visits-count'>$visitCount</td></tr>";
 }
 echo "<tr><td></td><td></td><td></td><td></td></tr>";
 echo "<tr><td><a href='/download'> Download All Redirects</a></td><td></td><td></td><td></td></tr>";
@@ -228,3 +238,6 @@ echo "<pre>path: ";
 var_dump($path);
 echo "</pre>";
 */
+
+echo '</body>
+</html>';
