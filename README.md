@@ -18,7 +18,7 @@ The next time you go to `example.com/<path>` you will be redirected to the url y
 
 `example.com/<path>/delete`  
 Delete the redirect at `<path>`.  
-The next time you to go `example/com/<path>` you will be prompted to enter a url.  
+The next time you to go `example.com/<path>` you will be prompted to enter a url.  
 
 That's it. That's the api.
 
@@ -27,7 +27,7 @@ That's it. That's the api.
 
 # Installing
 ## Run dockerized and simply  (start here) 
-* Build and run your simplygo server: `docker build -t simplygo . && docker run --rm -p 8000:80 -v $(pwd)/db:/var/www/html/db simplygo`  
+* Build and run your simplygo server: `docker build -t simplygo . && docker run -p 8000:80 --name simplygo_server simplygo`  
 * Visit `localhost:8000`
 * Your database will persist at `$(pwd)/db`. Feel free to delete or modify as you need. Feel free to change this if you'd like it stored elsewhere.
 

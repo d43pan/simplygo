@@ -12,16 +12,23 @@ WORKDIR /var/www/html/
 COPY . /var/www/html/
 
 
+
+# Install any needed packages 
+RUN apt-get update && apt-get install -y libsqlite3-dev sqlite3 
+
+
 RUN mkdir -p /var/www/html/db
+RUN sqlite3 /var/www/html/db/redirects.db ".databases"
+
+# Change the owner of the db directory to www-data
 RUN chown -R www-data:www-data /var/www/html/db
+
 
 # Change the ownership and permissions of the SQLite database file
 # RUN chown www-data:www-data /var/www/html/redirects.db
 # RUN chmod 664 /var/www/html/redirects.db
 
 
-# Install any needed packages specified in requirements.txt
-RUN apt-get update && apt-get install -y libsqlite3-dev
 
 # Install php extensions
 RUN docker-php-ext-install pdo_sqlite
