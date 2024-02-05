@@ -45,8 +45,14 @@ That's it. That's the api.
 
 # Development
 ## Local
+
+# get postgres on local docker  
 `docker pull postgres`  
-`set -o allexport && source .dev.env && set +o allexport`
+
+# source the env file to be able to a postgres container  
+`set -o allexport && source .dev.env && set +o allexport`  
+
+# Run the docker file
 `docker run --name $POSTGRES_CONTAINER -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD -p 5432:5432 -d postgres`
 
 
