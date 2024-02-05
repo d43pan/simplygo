@@ -55,4 +55,7 @@ That's it. That's the api.
 # Run the docker file
 `docker run --name $POSTGRES_CONTAINER -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD -p 5432:5432 -d postgres`
 
+# Connect to the postgres container
+`docker exec -it $POSTGRES_CONTAINER psql -U postgres`
+
 
