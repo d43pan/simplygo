@@ -6,8 +6,6 @@ FROM php:7.4-apache
 RUN a2enmod rewrite
 
 
-
-
 # Install any needed packages 
 RUN apt-get update && apt-get install -y libsqlite3-dev sqlite3 
 
