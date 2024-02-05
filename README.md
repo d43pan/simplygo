@@ -42,3 +42,21 @@ That's it. That's the api.
 
 * You might have to edit the php.ini file if your php is in a different location.  
 * You might have to ensure all the plugins are installed  
+
+
+# Development
+## Local
+
+# get postgres on local docker  
+`docker pull postgres`  
+
+# source the env file to be able to a postgres container  
+`set -o allexport && source .dev.env && set +o allexport`  
+
+# Run the docker file
+`docker run --name $POSTGRES_CONTAINER -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD -p 5432:5432 -d postgres`
+
+# Connect to the postgres container
+`docker exec -it $POSTGRES_CONTAINER psql -U postgres`
+
+
