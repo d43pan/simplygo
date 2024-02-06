@@ -1,8 +1,9 @@
+
 module.exports = {
     development: {
       client: 'pg',
       connection: {
-        database: process.env.DATABASE_NAME || 'knex-pg-db',
+        database: process.env.POSTGRES_DB || 'knex-pg-db',
         user: process.env.POSTGRES_USER || 'postgres',
         password: process.env.POSTGRES_USER_PW || '<INSERT PASSWORD FOR postgres USER HERE>',
         port: process.env.POSTGRES_PORT || 5432,

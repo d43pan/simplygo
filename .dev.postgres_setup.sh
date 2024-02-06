@@ -1,7 +1,0 @@
-#!/bin/bash
-
-psql -U postgres  -c "CREATE USER $DEV_POSTGRES_USER WITH PASSWORD '$DEV_POSTGRES_PASS';"
-
-
-docker exec -it $POSTGRES_CONTAINER psql -U $DEV_POSTGRES_USER -d $DEV_POSTGRES_DB 
-

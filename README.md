@@ -47,21 +47,17 @@ That's it. That's the api.
 # Development
 ## Local
 
-# get postgres on local docker  
-`docker pull postgres`  
 
-# source the env file to be able to a postgres container  
-`set -o allexport && source .dev.env && set +o allexport`  
+`cd node`
+`set -o allexport && source ../.env && set +o allexport`
+`bash db/postgres_init.sh`
+`npx knex migrate:up`
+`npm run knex -- seed:run`
 
-# Run the docker file
-`docker run --name $POSTGRES_CONTAINER -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD -p 5432:5432 -d postgres`
 
-# Connect to the postgres container
-`docker exec -it $POSTGRES_CONTAINER psql -U postgres`
-
-# Get connection script
-`envsubst < .dev.postgres_setup.sh`
-
+# Running the node code
+`yarn install`
+`yarn dev`
 
 ## Notes
 ## Entities 
