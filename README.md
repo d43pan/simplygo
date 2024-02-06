@@ -59,6 +59,13 @@ That's it. That's the api.
 `yarn install`
 `yarn dev`
 
+# Kill zombie process
+`fuser -k 9000/tcp`
+
+
+# React App
+`yarn dev`
+
 ## Notes
 ## Entities 
 
