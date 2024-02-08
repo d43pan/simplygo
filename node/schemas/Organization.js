@@ -1,4 +1,4 @@
-const baseSchema = require('./Base.ts');
+const baseSchema = require('./Base.js');
 
 const organizationSchema = (table) => {
     baseSchema(table),

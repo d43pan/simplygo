@@ -1,6 +1,6 @@
-const userSchema = require('../../schemas/User.ts');
-const organizationSchema = require('../../schemas/Organization.ts');
-const redirectSchema = require('../../schemas/Redirect.ts');
+const userSchema = require('../../schemas/User.js');
+const organizationSchema = require('../../schemas/Organization.js');
+const redirectSchema = require('../../schemas/Redirect.js');
 
 /**
  * @param { import("knex").Knex } knex
