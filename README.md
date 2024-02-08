@@ -45,17 +45,12 @@ That's it. That's the api.
 
 
 # Development
-## Local
+## Local Database
 
+`cd node/db/scripts/`
+ `./01_build_run_initdb_migrate_seed.sh ../../.env ../../`
 
-`cd node`
-`set -o allexport && source ../.env && set +o allexport`
-`bash db/postgres_init.sh`
-`npx knex migrate:up`
-`npm run knex -- seed:run`
-
-
-# Running the node code
+# Node Backend
 `yarn install`
 `yarn dev`
 
