@@ -1,11 +1,19 @@
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+
+
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: #000000;
+  background-color: #ffffff;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -15,21 +23,20 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+  color: #0000ee;
+  text-decoration: underline;
 }
 a:hover {
-  color: #535bf2;
+  color: #0000ee;
 }
 
 body {
-  margin: 0;
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
 }
-
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
@@ -42,7 +49,8 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #808080;
+  color: #000000;
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -54,15 +62,46 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+ input, button {
+  background-color: #c0c0c0; /* Light grey */
+  color: #000000; /* Black text */
+  height: 35px; /* Adjust as needed */
+  border: none; /* Removes border */
+}
+
+button:hover {
+  background-color: #c0c0c0; /* Same color on hover */
+} 
+
+ul, ol, li {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  width: 100vw;
+}
+
+.logo {
+  /* Add your logo styles here */
+}
+
+.login {
+  /* Add your login styles here */
+}
+
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
+    color: #000000;
     background-color: #ffffff;
   }
   a:hover {
-    color: #747bff;
+    color: #0000ee;
   }
   button {
-    background-color: #f9f9f9;
+    background-color: #808080;
   }
 }

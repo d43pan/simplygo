@@ -17,10 +17,11 @@ export const seed = async function (knex: Knex): Promise<void> {
     const randomUserIndex = Math.floor(Math.random() * userIds.length);
     const randomOrgIndex = Math.floor(Math.random() * organizationIds.length);
 
-
+    const path = faker.word.noun();
+    const url = 'http://www.' + path +'.com';
     return { 
-      path: faker.internet.url(),
-      url: faker.internet.url(),
+      path: path,
+      url: url,
       userId: userIds[randomUserIndex],
       organizationId: organizationIds[randomOrgIndex],
     }
