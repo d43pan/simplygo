@@ -1,7 +1,6 @@
-
 import { useAuth0 } from '@auth0/auth0-react';
 
-export const LoginButton = () => {
+export const SignUpButton = () => {
     const { loginWithRedirect } = useAuth0();
 
     const handleLogin = async() => {
@@ -9,14 +8,17 @@ export const LoginButton = () => {
             appState: {
                 returnTo: "/account",
             },
+            authorizationParams: {
+                screen_hint: "signup",
+            },
         });
     };
 
     return (
         <button onClick={() => handleLogin()}>
-            Log In
+            Sign Up
         </button>
     )
 };
 
-export default LoginButton;
+export default SignUpButton;

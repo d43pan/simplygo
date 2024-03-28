@@ -1,14 +1,27 @@
+import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import LoginButton from './LoginButton';
 import LogoutButton from './LogoutButton';
+import SignUpButton from './SignUpButton';
 
-export const AuthenticationButton = () => {
-    const { isAuthenticated } = useAuth0();
+const AuthenticationButton: React.FC = () => {
+    const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
-    return isAuthenticated ? 
-    <div><a href="/u/account">my account</a><LogoutButton /></div> 
-    :
-    <LoginButton />;
+    return (
+      <div>
+        {!isAuthenticated && (
+            <>
+              <SignUpButton />
+              <LoginButton />
+            </>
+          )}
+          {isAuthenticated && (
+            <>
+              <LogoutButton />
+            </>
+          )}
+     </div>
+    );
 };
 
 export default AuthenticationButton;

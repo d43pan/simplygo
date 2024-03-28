@@ -1,6 +1,7 @@
 // components/IndexPage.tsx
 import React, { useEffect, useState, useContext } from 'react';
 import PathInput from './PathInput';
+import { Link } from 'react-router-dom';
 import { Redirect } from '../interfaces/Redirect';
 import { LoggerContext } from './LoggerContext';
 
@@ -23,7 +24,16 @@ const IndexPage: React.FC = () => {
             <PathInput />
             {redirects.map((redirect, index) => (
                 <li key={index}>
-                    <a href={`/go/${redirect.path}`} target="_blank" >{redirect.path}</a>
+                    { /* <a href={`/go/${redirect.path}`} target="_blank" >{redirect.path}</a> */}
+                    <Link 
+                    to={{ 
+                        pathname: `/go/${redirect.path}`, 
+                        state: { url: redirect.url } 
+                    }} 
+                    target="_blank"
+                >
+                    {redirect.path}
+                </Link>
                 </li>
             ))}
         </div>

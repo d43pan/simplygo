@@ -1,24 +1,28 @@
-
-//import { useAuth0 } from '@auth0/auth0-react';
-import { useAuthenticatedFetch } from './useAuthenticatedFetch';
+import { useEffect } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 import LoadingDots from './LoadingDots';
+import { useNavigate } from 'react-router-dom';
 
 const Account = () => {
-    
-    //const { user, isAuthenticated, isLoading } = useAuth0();
+    const { user, isAuthenticated, isLoading } = useAuth0();
+    const navigate = useNavigate();
 
-    const { data: userMetadata, loading } = useAuthenticatedFetch(`http://${import.meta.env.VITE_APP_SERVER_URL}/api/user/account`);
+    useEffect(() => {
+        if (!isLoading && !isAuthenticated) {
+            navigate('/login'); // Redirect to the login page if the user is not authenticated
+        }
+    }, [isLoading, isAuthenticated, navigate]);
 
-    if (loading) {
-        return < LoadingDots />;
+    if (isLoading) {
+        return <LoadingDots />;
     }
 
     return (
         <div>
             <h3>User:  </h3>
             
-            {userMetadata ? (
-                <pre>{JSON.stringify(userMetadata, null, 2)}</pre>
+            {user ? (
+                <pre>{JSON.stringify(user, null, 2)}</pre>
             ) : (
                 'No user found'
             )}
