@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import IndexPage from './components/IndexPage';
+import {AuthenticationGuard}  from './components/AuthenticationGuard';
 import GoPath from './components/GoPath';
 import GoHome from './components/GoHome';
 import FailoverPage from './components/FailoverPage';
@@ -25,7 +26,8 @@ function App() {
        {/* <Route path="/go/:path/:pathAction" component={GoPathAction} /> */} 
         <Route path="/go" element={< GoHome />} />
         <Route path="/go/:path" element={< GoPath />} />
-        <Route path="/u/account" element={ <Account />} />
+        <Route path="/u/account" 
+          element={<AuthenticationGuard component={Account} />}  />
         <Route path="/login" element={< Login /> } />
         {/*<Route path="/u/:user/" element={ <UserPath />} /> */}
          

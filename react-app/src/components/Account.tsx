@@ -22,7 +22,11 @@ const Account = () => {
             <h3>User:  </h3>
             
             {user ? (
+                <>
+                <h2>{user.name}</h2>
+                <img src={user.picture} />
                 <pre>{JSON.stringify(user, null, 2)}</pre>
+                </>
             ) : (
                 'No user found'
             )}

@@ -28,3 +28,8 @@ export default {
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+
+# Helpful links
+https://developer.auth0.com/resources/guides/spa/react/basic-authentication?_gl=1*1nrc9lu*_gcl_au*MTE3NzA1OTYwNi4xNzA4Mjc2ODAy*_ga*MTYxMDEyNzg0OS4xNzA4Mjc2ODAz*_ga_QKMSDV5369*MTcxMTU4NDg0NS4xMC4xLjE3MTE1ODQ4ODAuMjUuMC4w#quick-react-setup
+
