@@ -35,18 +35,11 @@ export const useUsers = () => {
   const createOrUpdateUser = async (token: any) => {
     console.log('createOrUpdateUser - auth0User: ', auth0User)
     try {
-     
-      console.log('Access token:', token);
-     
-      console.log('Preparing request data...');
       const requestData = {
         auth0_sub: auth0User?.sub,
         email: auth0User?.email,
         // Add any other user properties you need
       };
-      console.log('Request data:', requestData);
-
-      console.log('Sending request...');
       const response = await fetch(`${server_url}/api/users/createOrUpdate`, {
         method: 'POST',
         headers: {
@@ -61,14 +54,11 @@ export const useUsers = () => {
         throw new Error('Network response was not ok');
       }
 
-      console.log('Parsing response data...');
+  
       const data = await response.json();
-      console.log('Response data:', data);
 
-      console.log('Setting user...');
       setUser(data);
 
-      console.log('Done.');
       return data;
     } catch (error) {
       console.error('Error:', error);
