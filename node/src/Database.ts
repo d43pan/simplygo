@@ -10,16 +10,11 @@ class Database {
     constructor(private knex: Knex) {}
 
 
-    validateRedirect(redirect: { path: string; url: string }) {
-        if (!validator.isURL(redirect.url)) {
-            throw new Error('Invalid URL');
-        }
 
-        const pathRegex = /^[a-zA-Z0-9-]+$/;
-        if (!pathRegex.test(redirect.path)) {
-            throw new Error('Invalid path');
-        }
-    }
+
+
+//USER
+
 
     async getUserById(user_id: string) {
         try {
@@ -37,7 +32,7 @@ class Database {
     async getFullUserById(user_id: string) {
         try {
             const user = await this.knex('users')
-                .where('id', user_id)
+                .where('auth0_sub', user_id)
                 .first();
 
             const organizations = await this.knex('organizations')
@@ -52,6 +47,65 @@ class Database {
             throw new Error('An error occurred while fetching the user');
         }
     }
+
+
+    async createOrUpdateUser(user: any) {
+        let dbUser;
+        try {
+            console.log("createOrUpdateUser user: ", user)
+            const existingUser = await this.knex('users')
+                .where('auth0_sub', user.auth0_sub)
+                .first();
+    
+            if (existingUser) {
+                // Update existing user
+                await this.knex('users')
+                    .where('auth0_sub', user.auth0_sub)
+                    .update({
+                        email: user.email,
+                        // Update any other user properties you need
+                    });
+    
+                // Return the updated user
+                dbUser = await this.knex('users')
+                    .where('auth0_sub', user.auth0_sub)
+                    .first();
+            } else {
+                // Create new user
+                const [createdUser] = await this.knex('users').insert({
+                    email: user.email,
+                    auth0_sub: user.auth0_sub
+                    // Add any other user properties you need
+                }).returning('*');
+    
+                // Return the created user
+
+                
+                dbUser = createdUser;
+            }
+            console.log("createOrUpdateUser dbUser: ", dbUser)
+            return dbUser;
+        } catch (error) {
+            console.error('Error:', error);
+            throw new Error('An error occurred while creating or updating the user');
+        }
+    }
+
+// REDIRECTS
+
+
+validateRedirect(redirect: { path: string; url: string }) {
+    if (!validator.isURL(redirect.url)) {
+        throw new Error('Invalid URL');
+    }
+
+    const pathRegex = /^[a-zA-Z0-9-]+$/;
+    if (!pathRegex.test(redirect.path)) {
+        throw new Error('Invalid path');
+    }
+}
+
+
     async getRecentRedirects(limit: number = 10) {
         try {
             const recentRedirects = await this.knex('redirects')

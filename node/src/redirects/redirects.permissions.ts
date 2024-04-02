@@ -1,0 +1,1 @@
+// Add permissions logic here in the future

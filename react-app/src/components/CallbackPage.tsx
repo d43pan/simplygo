@@ -1,68 +1,70 @@
 import { useEffect, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { useLocation, useNavigate } from 'react-router-dom';
 
+import { useNavigate } from 'react-router-dom';
+import LoadingDots from './LoadingDots';
+import { useUsers } from '../hooks/useUsers';
 
 
 const CallbackPage = () => {
-
-  const { error } = useAuth0();
-
-  if (error) {
-    return (
-      <div>
-        <h1>Error</h1>
-        {error.message}
-      </div>
-    )
-  }
-
-  return (
-    <div></div>
-  )
-
-}
-
-
-/*const CallbackPage = () => {
-  const { handleRedirectCallback} = useAuth0();
-  const location = useLocation();
-  const navigate = useNavigate();
-  const [queryParams, setQueryParams] = useState({});
-
-  useEffect(() => {
-    const processCallback = async () => {
-        try {
-          await handleRedirectCallback();
-          navigate('/'); // Redirect to the home page after handling the callback
-        } catch (error) {
-          console.error("Error processing the callback from Auth0: ", error);
+    const { user, handleRedirectCallback, getAccessTokenSilently } = useAuth0();
+    const { createOrUpdateUser } = useUsers();
+    const [auth0User, setUser]= useState(false);
+    let token;
+    const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
+    const server_url = import.meta.env.VITE_APP_SERVER_URL;
+/*
+    useEffect( () => {
+        const processCallback = async () => {
+            try {
+                await handleRedirectCallback();
+                token = await getAccessTokenSilently();
+            } catch (error ) {
+                console.log("error processing callback: ", error)
+            }
         }
-    };
 
-   /* const urlParams = new URLSearchParams(location.search);
-    const params = {};
-    for (let param of urlParams) {
-      params[param[0]] = param[1];
+        const processUser = async (u: any, t: any) => {
+            try {
+            await createOrUpdateUser(u, t);
+            } catch (error) {
+                console.error("Error processing the user in callback: ", error)
+            }
+        }
+
+
+        processCallback();
+        processUser(user, token);
+        setLoading(false);
+        navigate("/");
+        
+
+    }, [handleRedirectCallback, createOrUpdateUser, getAccessTokenSilently]);
+
+    if (loading){
+        <LoadingDots />
     }
-    setQueryParams(params);
-  
-    processCallback();
-  }, [handleRedirectCallback, navigate, location]);
+        */
 
-  return (
-    <div>
-      <h1>Callback</h1>
-      <h2>Query Parameters:</h2>
-      <ul>
-        {Object.entries(queryParams).map(([key, value]) => (
-          <li key={key}>
-            {key}: {value}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+    useEffect(() => {
+        (async () => {
+          try {
+            const token = await getAccessTokenSilently({});
+            const response = await createOrUpdateUser(token);
+            setUser(response);
+            navigate('/');
+          } catch (e) {
+            console.error(e);
+          }
+        })();
+      }, [getAccessTokenSilently, createOrUpdateUser]);
+
+    return (
+        <div>
+            {auth0User}
+        </div>
+    );
 };
-*/
+
 export default CallbackPage;

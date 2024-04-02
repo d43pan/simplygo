@@ -45,7 +45,7 @@ const CreateRedirect: React.FC = () => {
         if (location.pathname.startsWith('/go/') && (!url || !isValidUrl(url))) {
             return;
         }
-
+        //TODO
         // ... rest of the code
     };
 
